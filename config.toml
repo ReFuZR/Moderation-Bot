@@ -1,0 +1,25 @@
+# Bot settings. API keys do NOT go here; put them in .env (see .env.example).
+
+[bot]
+symbols = ["SPY", "QQQ", "IWM"]   # stocks/ETFs, or crypto pairs like "BTC/USD"
+timeframe = "1Day"               # 1Min, 5Min, 15Min, 1Hour, 1Day, 1Week
+starting_cash = 100000           # backtests only; paper trading uses your Alpaca balance
+slippage_bps = 5                 # backtest cost per fill (0.05%)
+commission = 0                   # backtest flat fee per fill
+poll_seconds = 60                # paper loop: how often to check for new bars
+data_feed = "iex"                # "iex" is free; "sip" needs a paid data plan
+
+[strategy]
+name = "sma_crossover"           # run `python -m tradebot strategies` for the list
+
+[strategy.params]
+fast = 20
+slow = 50
+
+[risk]
+risk_per_trade = 0.01            # lose at most ~1% of equity when a stop is hit
+stop_loss_pct = 0.08             # exit 8% below entry
+take_profit_pct = 0              # exit this far above entry (0 = off, let the strategy decide)
+max_position_pct = 0.25          # cap any single position at 25% of equity
+max_open_positions = 4
+max_daily_loss_pct = 0.03        # no new trades for the rest of the day after a 3% loss
